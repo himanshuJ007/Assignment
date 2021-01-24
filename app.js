@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 var csv = require("fast-csv");
-const Product = require("./model/product");
+const Sales = require("./model/sales");
 const app = express();
 const path = require("path");
 var multer = require("multer");
@@ -40,7 +40,7 @@ app.post("/upload", (req, res) => {
           .parseFile("./files/myfile.csv", { headers: true })
           .on("data", function (row) {
             csvStream.pause();
-            Product.create(row)
+            Sales.create(row)
               .then(() => {
                 console.log("Successfull");
               })
